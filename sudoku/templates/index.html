@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .sudoku-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 40px);
+            grid-template-rows: repeat(9, 40px);
+            gap: 2px;
+        }
+        .cell {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        .cell:nth-child(3n) {
+            border-right: 2px solid #000;
+        }
+        .cell:nth-child(9n+1) {
+            border-left: 2px solid #000;
+        }
+        .cell:nth-child(n+19):nth-child(-n+27),
+        .cell:nth-child(n+46):nth-child(-n+54) {
+            border-bottom: 2px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Sudoku Generator</h1>
+        <div class="sudoku-grid" id="sudoku-grid"></div>
+        <button onclick="generateSudoku()">Generate Puzzle</button>
+    </div>
+
+    <script>
+        async function generateSudoku() {
+            const response = await fetch('/generate');
+            const data = await response.json();
+            const grid = document.getElementById('sudoku-grid');
+            grid.innerHTML = ''; // Clear existing grid
+
+            data.puzzle.forEach(row => {
+                row.forEach(cell => {
+                    const cellDiv = document.createElement('div');
+                    cellDiv.className = 'cell';
+                    cellDiv.textContent = cell !== 0 ? cell : '';
+                    grid.appendChild(cellDiv);
+                });
+            });
+        }
+        // Load a puzzle on page load
+        window.onload = generateSudoku;
+    </script>
+</body>
+</html>
