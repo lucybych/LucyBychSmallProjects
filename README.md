@@ -1,2 +1,3 @@
-# LucyBychSmallProjects
-For myself to post any smaller coding projects I have that don't require their own folders/repositories.
+For myself to post any smaller coding projects I have that don't require their own folders/repositories. Current projects include:
+1. Sudoku generator - Creates a webpage on your local machine that generates a new Sudoku puzzle upon refresh or clicking of a button. WIP as I want to improve the generation process and make it solvable on the webpage rather than just needing to print out a copy.
+2. Spreadsheet analysis - A friend asked to analyze one of their spreadsheets related to the collection of Pokemon cards, which I created using Python and Pandas. WIP as I want to include making specific filters to search for cards.
